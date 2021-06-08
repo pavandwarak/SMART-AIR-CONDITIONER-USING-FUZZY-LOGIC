@@ -1,0 +1,66 @@
+[System]
+Name='SMART AC'
+Type='mamdani'
+Version=2.0
+NumInputs=3
+NumOutputs=2
+NumRules=10
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='Outdoor_temp'
+Range=[4 48]
+NumMFs=5
+MF1='very_cool':'trapmf',[4 8.9 8.9 13]
+MF2='cool':'trapmf',[13 16.5 16.5 20]
+MF3='moderate':'trapmf',[20 25 25 30]
+MF4='warm':'trapmf',[30 34 34 38]
+MF5='hot':'trapmf',[38 43 43 48]
+
+[Input2]
+Name='Humidity'
+Range=[10 70]
+NumMFs=4
+MF1='Dry':'trapmf',[10 10 25 25]
+MF2='Refreshing':'trapmf',[26 26 40 40]
+MF3='Comfortable':'trapmf',[41 41 55 55]
+MF4='Humid':'trapmf',[56 56 70 70]
+
+[Input3]
+Name='Physical_presence'
+Range=[0 1]
+NumMFs=2
+MF1='NO':'trapmf',[0 0 0 0]
+MF2='YES':'trapmf',[1 1 1 1]
+
+[Output1]
+Name='AC_temp'
+Range=[0 30]
+NumMFs=4
+MF1='Low':'trapmf',[16 16 16 19]
+MF2='Medium':'trapmf',[19 19 19 23]
+MF3='High':'trapmf',[23 23 23 30]
+MF4='off':'trapmf',[0 0 0 0]
+
+[Output2]
+Name='Fin_direction.'
+Range=[10 80]
+NumMFs=2
+MF1='Away':'trapmf',[10 10 45 45]
+MF2='Towards':'trapmf',[46 46 80 80]
+
+[Rules]
+1 1 1, 4 0 (1) : 1
+1 1 2, 3 2 (1) : 1
+2 3 2, 3 1 (1) : 1
+3 4 2, 2 1 (1) : 1
+4 2 2, 1 2 (1) : 1
+5 4 2, 1 2 (1) : 1
+3 3 2, 2 1 (1) : 1
+2 3 1, 4 0 (1) : 1
+1 4 2, 3 1 (1) : 1
+2 1 2, 3 1 (1) : 1
